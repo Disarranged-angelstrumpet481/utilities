@@ -74,6 +74,7 @@
     "./next"    : "./src/next/index.ts",
     "./nuxt"    : "./src/nuxt/index.ts"
   },
+  "files"             : ["src", "readme.md", "license.md"],
 
   "publishConfig"     : {
     "access"  : "public"
