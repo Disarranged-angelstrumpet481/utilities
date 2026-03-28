@@ -18,14 +18,16 @@
   },
 
   "scripts"           : {
+    "build"     : "tsup",
+    "dev"       : "tsup --watch",
     "test"      : "vitest",
     "coverage"  : "pnpm test --coverage",
     "clean"     : "rimraf node_modules dist .turbo"
   },
 
-  "main"              : "./dist/index.mjs",
-  "module"            : "./dist/index.mjs",
-  "types"             : "./dist/index.d.ts",
+  "main"              : "./dist/core/index.mjs",
+  "module"            : "./dist/core/index.mjs",
+  "types"             : "./dist/core/index.d.ts",
 
   "dependencies"      : {
     "class-variance-authority"  : "^0.7.1",
@@ -37,6 +39,7 @@
     "@types/node"               : "^25.5.0",
     "@types/react"              : "^19.2.4",
     "typescript"                : "^5.9.3",
+    "tsup"                      : "^8.5.1",
     "vitest"                    : "^4.0.18",
     "@vitest/coverage-v8"       : "^4.0.18",
     "@vitest/ui"                : "^4.0.18",
@@ -68,13 +71,33 @@
   },
 
   "exports"           : {
-    "."         : "./src/core/index.ts",
-    "./vue"     : "./src/vue/index.ts",
-    "./react"   : "./src/react/index.ts",
-    "./next"    : "./src/next/index.ts",
-    "./nuxt"    : "./src/nuxt/index.ts"
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./vue": {
+      "import": "./dist/vue/index.mjs",
+      "require": "./dist/vue/index.mjs",
+      "types": "./dist/vue/index.d.ts"
+    },
+    "./react": {
+      "import": "./dist/react/index.mjs",
+      "require": "./dist/react/index.mjs",
+      "types": "./dist/react/index.d.ts"
+    },
+    "./next": {
+      "import": "./dist/next/index.mjs",
+      "require": "./dist/next/index.mjs",
+      "types": "./dist/next/index.d.ts"
+    },
+    "./nuxt": {
+      "import": "./dist/nuxt/index.mjs",
+      "require": "./dist/nuxt/index.mjs",
+      "types": "./dist/nuxt/index.d.ts"
+    }
   },
-  "files"             : ["src", "readme.md", "license.md"],
+  "files"             : ["dist", "readme.md", "license.md"],
 
   "publishConfig"     : {
     "access"  : "public"

@@ -4,7 +4,9 @@
     "baseUrl" : ".",
     "paths"   : {
       "@obvia/utilities" : ["src"]
-    }
+    },
+    "incremental": false,
+    "composite": false
   },
   "include"         : ["."],
   "exclude"         : ["dist", "build", "node_modules"]

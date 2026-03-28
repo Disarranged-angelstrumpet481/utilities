@@ -52,6 +52,10 @@ jobs:
       # Install project dependencies with pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+
+      # Install project dependencies with pnpm
+      - name: Build package
+        run: pnpm build
       # Use changesets to either create a release PR or publish packages
       - name: Publish to npm
         run: pnpm publish --access public --no-git-checks
