@@ -1,10 +1,11 @@
 {
+  "sideEffects"       : false,
   "name"              : "@obvia/utilities",
   "description"       : "Foundational utilities and constants that empower clarity and developer experience.",
   "keywords"          : ["utility", "utilities", "helpers", "constants", "functions", "type-safe", "modular", "lightweight", "shared", "semantic", "obvia", "react", "nuxt", "nextjs", "vue"],
   "license"           : "MIT",
   "homepage"          : "https://obvia.studio/",
-  "version"           : "0.0.2",
+  "version"           : "0.0.3",
 
   "author"            : {
     "name"  : "Selçuk Çukur",
@@ -27,7 +28,7 @@
 
   "main"              : "./dist/core/index.mjs",
   "module"            : "./dist/core/index.mjs",
-  "types"             : "./dist/core/index.d.ts",
+  "types"             : "./dist/core/index.d.mts",
 
   "dependencies"      : {
     "class-variance-authority"  : "^0.7.1",
@@ -74,27 +75,27 @@
     ".": {
       "import": "./dist/index.mjs",
       "require": "./dist/index.mjs",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/index.d.mts"
     },
     "./vue": {
       "import": "./dist/vue/index.mjs",
       "require": "./dist/vue/index.mjs",
-      "types": "./dist/vue/index.d.ts"
+      "types": "./dist/vue/index.d.mts"
     },
     "./react": {
       "import": "./dist/react/index.mjs",
       "require": "./dist/react/index.mjs",
-      "types": "./dist/react/index.d.ts"
+      "types": "./dist/react/index.d.mts"
     },
     "./next": {
       "import": "./dist/next/index.mjs",
       "require": "./dist/next/index.mjs",
-      "types": "./dist/next/index.d.ts"
+      "types": "./dist/next/index.d.mts"
     },
     "./nuxt": {
       "import": "./dist/nuxt/index.mjs",
       "require": "./dist/nuxt/index.mjs",
-      "types": "./dist/nuxt/index.d.ts"
+      "types": "./dist/nuxt/index.d.mts"
     }
   },
   "files"             : ["dist", "readme.md", "license.md"],
