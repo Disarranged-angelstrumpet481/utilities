@@ -1,3 +1,3 @@
-export * from "./domain"
-export * from "./hostname"
-export * from "./global"
+export * from "./configuration/domain"
+export * from "./configuration/hostname"
+export * from "./configuration/global"
