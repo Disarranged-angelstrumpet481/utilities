@@ -2,7 +2,7 @@
 export * from "../core"
 
 // Vue (Constants & Functions)
-export * from "../vue"
+//export * from "../vue"
 
 // Constants
 export * from "./constants"

@@ -572,7 +572,7 @@ export const WEB_DOMAIN =
  * const redirectDomain =
  *   process.env.NODE_ENV === "production"
  *     ? "https://app.sirketio.com"
- *     : "https://app.sirketio.dev"
+ *     : "https://app.obvia.dev"
  *
  * // Redirect the user to the correct domain
  * window.location.href = redirectDomain
