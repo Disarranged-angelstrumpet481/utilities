@@ -61,7 +61,7 @@ export interface RequestContext {
  * console.log(queryRaw)
  * ```
  */
-export function parseProxy(request: NextRequest): RequestContext {
+export function parseRequest(request: NextRequest): RequestContext {
   // Normalize domain
   const domain = (request.headers.get("host") ?? "")
     .replace(/^www\./, "")

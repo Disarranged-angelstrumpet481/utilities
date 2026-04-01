@@ -2,7 +2,7 @@ import type { NextFetchEvent, NextRequest } from "next/server"
 import {
   proxyLog,
   type RequestContext,
-} from "@obvia-next"
+} from "../../../index"
 
 /**
  * Type definition for a proxy function used in the proxy layer
