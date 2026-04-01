@@ -1,5 +1,29 @@
 import { HOSTNAMES } from "@obvia-next"
 
+/**
+ * Parse tenant (workspace) slug from path/domain
+ *
+ * **Parameters**
+ * - `segments`- Path segments array (e.g., ["en", "obvia", "dashboard"])
+ * - `domain` - Normalized domain string (e.g., "app.obvia.studio" or "team1.obvia.studio")
+ * - `hasLocale` - Boolean flag indicating whether the first segment is a locale
+ *
+ * **Usage**
+ * ```ts
+ * // Parse tenant from path/domain
+ * const { workspace, subdomain, pathname } =
+ *   parseTenant(["en", "obvia", "dashboard"], "app.obvia.studio", true)
+ *
+ * // Workspace (obvia)
+ * console.log(workspace)
+ *
+ * // Path (/dashboard)
+ * console.log(pathname)
+ *
+ * // Subdomain flag (false in this case, true if workspace came from subdomain)
+ * console.log(subdomain)
+ * ```
+ */
 export function parseTenant(
   segments: string[],
   domain: string,
