@@ -1,12 +1,5 @@
 import { HOSTNAMES } from "@obvia-next"
 
-/**
- * Parse tenant (workspace) slug from path/domain
- *
- * @param segments   - Path segments array
- * @param domain     - Normalized domain string
- * @param hasLocale  - Whether the first segment is a locale
- */
 export function parseTenant(
   segments: string[],
   domain: string,

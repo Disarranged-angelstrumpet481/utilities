@@ -1,7 +1,7 @@
 import {
   APP_LOCALE,
   APP_LOCALES,
-  HOSTNAMES
+  parseTenant
 } from "@obvia-next"
 
 /**
@@ -41,56 +41,21 @@ export function parseSegment(path: string, domain: string): {
 
   // Default locale is the application-wide locale
   let locale = APP_LOCALE
-
-  // Workspace slug, initially empty
-  let workspace = ""
-
-  // Pathname starts as the original path
-  let pathname = path
-
-  // Flag to indicate whether the workspace was derived from a subdomain
-  let subdomain = false
+  let hasLocale = false
 
   // First segment is a supported locale
   if (segments.length > 0 && segments[0] && APP_LOCALES.has(segments[0])) {
     locale = segments[0]
-
-    if (domain.startsWith("app.")) {
-      // app.* domains → workspace from second segment
-      workspace = segments[1] ?? ""
-      pathname = "/" + segments.slice(2).join("/")
-    } else if (!HOSTNAMES.includes(domain)) {
-      // custom subdomain → workspace from domain
-      const sub = domain.split(".")
-      workspace = sub[0] && sub[0] !== "www" ? sub[0] : ""
-      subdomain = true
-      pathname = "/" + segments.slice(1).join("/")
-    } else {
-      // plain hostname → workspace from second segment
-      workspace = segments[1] ?? ""
-      pathname = "/" + segments.slice(2).join("/")
-    }
-  } else {
-    // No locale segment present
-    if (domain.startsWith("app.")) {
-      // app.* domains → workspace from first segment
-      workspace = segments[0] ?? ""
-      pathname = "/" + segments.slice(1).join("/")
-    } else if (!HOSTNAMES.includes(domain)) {
-      // custom subdomain → workspace from domain
-      const sub = domain.split(".")
-      workspace = sub[0] && sub[0] !== "www" ? sub[0] : ""
-      subdomain = true
-      pathname = "/" + segments.join("/")
-    } else {
-      // plain hostname → workspace from first segment
-      workspace = segments[0] ?? ""
-      pathname = "/" + segments.slice(1).join("/")
-    }
+    hasLocale = true
   }
 
-  // Ensure pathname is never empty
-  if (pathname === "") pathname = "/"
+  // Delegate workspace/subdomain/pathname parsing to parseTenant
+  const { workspace, subdomain, pathname } = parseTenant(segments, domain, hasLocale)
 
-  return { locale, workspace, pathname, subdomain }
+  return {
+    locale,
+    workspace,
+    pathname,
+    subdomain
+  }
 }
