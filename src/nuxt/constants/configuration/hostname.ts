@@ -1,4 +1,4 @@
-import { APP_HOST } from "./global"
+import { APP_HOST } from "@obvia-nuxt"
 
 /**
  * A set of allowed hostnames for **academy** access, used for domain validation

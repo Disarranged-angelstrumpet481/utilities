@@ -1,6 +1,5 @@
 import type { NextRequest } from "next/server"
-import { parseSegment } from "./parse-segment"
-import { parseQuery } from "./parse-query"
+import { parseQuery, parseSegment } from "@obvia-next"
 
 export interface RequestContext {
   /** Workspace slug if applicable (on app subdomain) */

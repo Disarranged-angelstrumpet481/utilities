@@ -2,7 +2,7 @@ import {
   APP_LOCALE,
   APP_LOCALES,
   HOSTNAMES
-} from "../../../constants"
+} from "@obvia-next"
 
 /**
  * Parse URL segments into locale, workspace, normalized pathname, and subdomain flag

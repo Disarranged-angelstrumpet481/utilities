@@ -4,7 +4,12 @@
     "incremental" : false,
     "baseUrl"     : ".",
     "paths"       : {
-      "@obvia/utilities" : ["src"]
+      "@obvia/utilities"  : ["src"],
+      "@obvia-core"       : ["src/core"],
+      "@obvia-next"       : ["src/next"],
+      "@obvia-react"      : ["src/react"],
+      "@obvia-nuxt"       : ["src/nuxt"],
+      "@obvia-vue"        : ["src/vue"]
     }
   },
   "include"         : ["."],

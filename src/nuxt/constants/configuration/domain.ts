@@ -1,7 +1,7 @@
 import {
   APP_ENV,
   APP_HOST
-} from "./global"
+} from "@obvia-nuxt"
 
 /**
  * The domain name of the **academy**, dynamically resolved based on the current environment
