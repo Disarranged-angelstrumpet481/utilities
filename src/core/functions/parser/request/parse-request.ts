@@ -1,4 +1,3 @@
-import type { NextRequest } from "next/server"
 import { parseQuery, parseSegment } from "@obvia-next"
 
 export interface RequestContext {
@@ -61,15 +60,15 @@ export interface RequestContext {
  * console.log(queryRaw)
  * ```
  */
-export function parseRequest(request: NextRequest): RequestContext {
+export function parseRequest(request: Request): RequestContext {
   // Normalize domain
   const domain = (request.headers.get("host") ?? "")
-    .replace(/^www\./, "")
-    .toLowerCase()
+  .replace(/^www\./, "")
+  .toLowerCase()
 
   // Resolve effective URL
   const url = new URL(
-    request.nextUrl.toString()
+    request.url.toString()
   )
 
   // Parse segments (locale, workspace, pathname, subdomain)

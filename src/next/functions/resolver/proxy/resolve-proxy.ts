@@ -2,12 +2,12 @@ import type { NextFetchEvent, NextRequest } from "next/server"
 import {
   proxyLog,
   type RequestContext,
-} from "../../../index"
+} from "@obvia-next"
 
 /**
  * Type definition for a proxy function used in the proxy layer
  */
-type ProxyFn = (request: NextRequest, event: NextFetchEvent, context: RequestContext) => Response | Promise<Response>
+export type ProxyFn = (request: NextRequest, event: NextFetchEvent, context: RequestContext) => Response | Promise<Response>
 
 /**
  * Resolver interface definition
