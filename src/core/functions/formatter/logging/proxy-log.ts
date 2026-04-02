@@ -5,7 +5,7 @@ import kleur from "kleur"
  */
 export interface ProxyLogOptions {
   domain: string
-  response?: Response
+  headers?: Headers
   path?: string
 }
 
@@ -50,7 +50,7 @@ export function proxyLog({
   const time = new Date().toLocaleString()
 
   // Domain
-  const domain = context.domain || context.response?.headers.get('x-middleware-request-host') || "obvia.dev"
+  const domain = context.domain || context.headers?.get('x-middleware-request-host') || "obvia.dev"
 
   console.log(
     // Timestamp + Tag

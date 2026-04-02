@@ -142,8 +142,8 @@ export async function parseRequest(
       name    : "Translation",
       request : request,
       context : {
-        domain,
-        response
+        domain  : domain,
+        headers : response.headers
       }
     })
   } else {
