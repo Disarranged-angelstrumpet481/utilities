@@ -60,7 +60,7 @@ export interface RequestContext {
 export interface ParseRequest<
   TReq extends Request = Request,
   TRes extends Response = Response
-> extends SegmentOptions, QueryOptions, Pick<TenantOptions, "hostnames">  {
+> extends SegmentOptions, QueryOptions, Pick<TenantOptions, "hasLocale">  {
   /**
    * Optional translation proxy function
    */
