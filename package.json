@@ -5,7 +5,7 @@
   "keywords"          : ["utility", "utilities", "helpers", "constants", "functions", "type-safe", "modular", "lightweight", "shared", "semantic", "obvia", "react", "nuxt", "nextjs", "vue"],
   "license"           : "MIT",
   "homepage"          : "https://obvia.studio/",
-  "version"           : "1.0.1",
+  "version"           : "1.0.2",
 
   "author"            : {
     "name"  : "Selçuk Çukur",
