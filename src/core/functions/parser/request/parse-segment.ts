@@ -1,8 +1,4 @@
-import {
-  APP_LOCALE,
-  APP_LOCALES,
-  parseTenant
-} from "../../../../next"
+import { parseTenant } from "@obvia-core"
 
 /**
  * Configuration options for parsing locale and workspace segments
@@ -24,17 +20,13 @@ export interface SegmentOptions {
 
   /**
    * Default locale to use if none is found in path
-   *
-   * @default APP_LOCALE
    */
-  defaultLocale?: string
+  defaultLocale: string
 
   /**
    * Supported locales set
-   *
-   * @default APP_LOCALES
    */
-  supportedLocales?: Set<string>
+  supportedLocales: Set<string>
 }
 
 /**
@@ -68,14 +60,14 @@ export interface SegmentResult {
 export function parseSegment(
   path: string,
   domain: string,
-  options: SegmentOptions = {}
+  options: SegmentOptions
 ): SegmentResult {
   // Extract options with safe defaults
   const {
     localeSegment = 0,
     workspaceSegment = 1,
-    defaultLocale = APP_LOCALE,
-    supportedLocales = APP_LOCALES
+    defaultLocale,
+    supportedLocales
   } = options
 
   // Split the incoming path into segments, removing empty parts

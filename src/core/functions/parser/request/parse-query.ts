@@ -1,36 +1,89 @@
 /**
- * Parse query parameters from a URL into structured metadata
+ * Configuration options for parsing query parameters
+ */
+export interface QueryOptions {
+  /**
+   * List of query parameter keys to explicitly include
+   */
+  include?: string[]
+
+  /**
+   * List of query parameter keys to ignore
+   */
+  exclude?: string[]
+
+  /**
+   * Custom parsing function for values
+   * @default auto‑convert to boolean/number/null/string
+   */
+  onParsing?: (val: string | undefined) => unknown
+}
+
+/**
+ * Parse query parameters from a given URL into structured metadata.
  *
- * **Parameter**
- * - `url` - The resolved URL object containing search parameters
+ * **Parameters**
+ * - `url` — The URL object to parse
+ * - `options` — Optional configuration
+ *    - `include` — List of query parameter keys to explicitly include
+ *    - `exclude` — List of query parameter keys to ignore
+ *    - `onParsing` — Custom parsing function for values (default: auto‑convert to boolean/number/null/string)
+ *
+ * **Returns**
+ * - `query` — Parsed query parameters as an object
+ * - `queryRaw` — Raw query string including the leading "?" if present
  *
  * **Usage**
  * ```ts
- * // Create a new URL instance
- * const { query, queryRaw } = parseQuery(
- *   new URL("https://obvia.studio/?last_workspace=obvia")
- * )
+ * // Example with include
+ * const { query } = parseQuery(new URL("https://example.com?foo=1&bar=true"), {
+ *   include: ["foo"]
+ * })
+ * console.log(query) // { foo: 1 }
  *
- * // Query object ({ last_workspace: "obvia" })
- * console.log(query)
- *
- * // Query raw "?last_workspace=obvia"
- * console.log(queryRaw)
+ * // Example with exclude
+ * const { query } = parseQuery(new URL("https://example.com?foo=1&bar=true"), {
+ *   exclude: ["bar"]
+ * })
+ * console.log(query) // { foo: 1 }
  * ```
  */
-export function parseQuery(url: URL): {
-  query: Record<string, string>
+export function parseQuery(
+  url: URL,
+  options?: QueryOptions
+): {
+  query: Record<string, unknown>
   queryRaw: string
 } {
-  // Convert search parameters to a raw string (without leading "?")
+  // Convert search parameters to string
   const parameters = url.searchParams.toString()
+  const query: Record<string, unknown> = {}
 
-  // Transform search parameters into a key-value object
-  const query = Object.fromEntries(url.searchParams)
+  // Default parsing logic: convert to boolean, number, or null if possible
+  const defaultParse = (val: string | undefined): string | number | boolean | null => {
+    if (val == null || val === "") return null
+    if (val === "true") return true
+    if (val === "false") return false
+    if (/^-?\d+$/.test(val)) return Number(val)
+    return val
+  }
 
-  // Add leading "?" if parameters exist, otherwise return an empty string
+  // Use custom parsing function if provided, otherwise default
+  const parseValue = options?.onParsing ?? defaultParse
+
+  for (const key of url.searchParams.keys()) {
+    // Apply include filter (if provided, only allow listed keys)
+    if (options?.include && !options.include.includes(key)) continue
+    // Apply exclude filter (ignore listed keys)
+    if (options?.exclude && options.exclude.includes(key)) continue
+
+    const values = url.searchParams.getAll(key)
+    query[key] = values.length > 1
+      ? values.map(parseValue)
+      : parseValue(values[0])
+  }
+
+  // Construct raw query string with leading "?" if parameters exist
   const queryRaw = parameters.length > 0 ? `?${parameters}` : ""
-
-  // Return both structured and raw query representations
   return { query, queryRaw }
 }

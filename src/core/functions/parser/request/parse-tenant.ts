@@ -69,8 +69,7 @@ export interface TenantResult {
  *    - `hostnames` – Supported hostnames list (default: HOSTNAMES)
  *    - `localeSegment` – Index of the locale segment in path (default: 0)
  *    - `workspaceSegment` – Index of the workspace segment in path (default: 1 if hasLocale, else 0)
- *    - `defaultLocale` – Default locale to use if none is found (default: APP_LOCALE)
- *    - `supportedLocales` – Supported locales set (default: APP_LOCALES)
+ *    - `locale` – Default locale to use if none is found (default: APP_LOCALE)
  *
  * **Usage**
  * ```ts

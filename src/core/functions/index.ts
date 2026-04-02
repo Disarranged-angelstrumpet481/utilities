@@ -8,7 +8,7 @@ export { fetchWithTimeout } from "./fetcher/fetch-with-timeout"
 export { fetcher } from "./fetcher/fetcher"
 
 // Parser
-export { parseRequest, type RequestContext } from "./parser/request/parse-request"
-export { parseSegment } from "./parser/request/parse-segment"
-export { parseQuery } from "./parser/request/parse-query"
-export { parseTenant } from "./parser/request/parse-tenant"
+export { parseRequest, type RequestContext, type ParseRequest } from "./parser/request/parse-request"
+export { parseSegment, type SegmentResult, type SegmentOptions } from "./parser/request/parse-segment"
+export { parseQuery, type QueryOptions } from "./parser/request/parse-query"
+export { parseTenant, type TenantOptions, type TenantResult } from "./parser/request/parse-tenant"
