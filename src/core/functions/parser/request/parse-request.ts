@@ -57,11 +57,14 @@ export interface RequestContext {
 /**
  * Configuration options for parsing query parameters
  */
-export interface ParseRequest extends SegmentOptions, QueryOptions, Pick<TenantOptions, "hostnames">  {
+export interface ParseRequest<
+  TReq extends Request = Request,
+  TRes extends Response = Response
+> extends SegmentOptions, QueryOptions, Pick<TenantOptions, "hostnames">  {
   /**
    * Optional translation proxy function
    */
-  translationProxy?: (request: Request) => Promise<Response> | Response
+  translationProxy?: (request: TReq) => TRes | Promise<TRes>
 }
 
 /**
@@ -115,9 +118,12 @@ export interface ParseRequest extends SegmentOptions, QueryOptions, Pick<TenantO
  * console.log(response.headers.get("x-middleware-rewrite"))
  * ```
  */
-export async function parseRequest(
-  request: Request,
-  options: ParseRequest
+export async function parseRequest<
+  TReq extends Request = Request,
+  TRes extends Response = Response
+>(
+  request: TReq,
+  options: ParseRequest<TReq, TRes>
 ): Promise<RequestContext> {
   // Normalize the domain name from the "host" header
   const domain = (request.headers.get("host") ?? "")

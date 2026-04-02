@@ -12,11 +12,11 @@ export interface ProxyLogOptions {
 /**
  * Options for proxy log function
  */
-export interface ProxyLog {
+export interface ProxyLog<TReq extends Request = Request> {
   /** Proxy name identifier */
   name: string
   /** Incoming request object */
-  request: Request
+  request: TReq
   /** Parsed request context metadata */
   context: ProxyLogOptions
 }
@@ -41,11 +41,11 @@ export interface ProxyLog {
  * })
  * ```
  */
-export function proxyLog({
+export function proxyLog<TReq extends Request = Request>({
   name,
   request,
   context,
-}: ProxyLog) {
+}: ProxyLog<TReq>) {
   // Timestamp
   const time = new Date().toLocaleString()
 
