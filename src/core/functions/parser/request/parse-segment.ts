@@ -5,6 +5,13 @@ import { parseTenant } from "@obvia-core"
  */
 export interface SegmentOptions {
   /**
+   * Supported hostnames list
+   *
+   * @default new Set(["en"])
+   */
+  hostnames?: string[]
+
+  /**
    * Index of the locale segment in path
    *
    * @default 0
@@ -64,6 +71,7 @@ export function parseSegment(
 ): SegmentResult {
   // Extract options with safe defaults
   const {
+    hostnames,
     localeSegment = 0,
     workspaceSegment = 1,
     defaultLocale,
@@ -86,6 +94,7 @@ export function parseSegment(
 
   // Delegate workspace, subdomain, and pathname parsing to parseTenant
   const { workspace, subdomain, pathname } = parseTenant(segments, domain, {
+    hostnames: hostnames,
     hasLocale: hasLocale,
     localeSegment: localeSegment,
     workspaceSegment: workspaceSegment,

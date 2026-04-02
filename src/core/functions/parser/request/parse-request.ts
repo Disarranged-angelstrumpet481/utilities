@@ -1,5 +1,6 @@
 import type { SegmentOptions } from "./parse-segment"
 import type { QueryOptions } from "./parse-query"
+import type { TenantOptions } from "./parse-tenant"
 import { parseQuery, parseSegment } from "@obvia-core"
 import { proxyLog } from "@obvia-next"
 
@@ -56,7 +57,7 @@ export interface RequestContext {
 /**
  * Configuration options for parsing query parameters
  */
-export interface ParseRequest extends SegmentOptions, QueryOptions {
+export interface ParseRequest extends SegmentOptions, QueryOptions, Pick<TenantOptions, "hostnames">  {
   /**
    * Optional translation proxy function
    */
