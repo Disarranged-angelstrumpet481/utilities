@@ -1,6 +1,8 @@
 import type { SegmentOptions } from "./parse-segment"
 import type { QueryOptions } from "./parse-query"
 import { parseQuery, parseSegment } from "@obvia-core"
+import { proxyLog } from "@obvia-next"
+
 /**
  * Configuration options for parsing query parameters
  */
@@ -122,10 +124,11 @@ export async function parseRequest(
   .toLowerCase()
 
   let url: URL
+  let response: Response | undefined
 
   if (options?.translationProxy) {
     // If a translation proxy is provided, call it with the request
-    const response = await options.translationProxy(request)
+    response = await options.translationProxy(request)
 
     // Resolve the effective URL using headers returned by the proxy
     // Priority: "Location" → "x-middleware-rewrite" → fallback to request.url
@@ -134,6 +137,15 @@ export async function parseRequest(
       response.headers.get("x-middleware-rewrite") ||
       request.url.toString()
     )
+
+    proxyLog({
+      name    : "Translation",
+      request : request,
+      context : {
+        domain,
+        response
+      }
+    })
   } else {
     // Default effective URL when no translation proxy is used
     url = new URL(request.url.toString())
@@ -159,6 +171,7 @@ export async function parseRequest(
     path: pathname,
     fullPath,
     query,
-    queryRaw
+    queryRaw,
+    ...(response ? { response } : {}),
   } as RequestContext
 }

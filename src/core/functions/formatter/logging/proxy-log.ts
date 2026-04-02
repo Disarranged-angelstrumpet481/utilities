@@ -1,5 +1,25 @@
-import type { NextRequest } from "next/server"
 import kleur from "kleur"
+
+/**
+ * Options for proxyLog function
+ */
+export interface ProxyLogOptions {
+  domain: string
+  response?: Response
+  path?: string
+}
+
+/**
+ * Options for proxy log function
+ */
+export interface ProxyLog {
+  /** Proxy name identifier */
+  name: string
+  /** Incoming request object */
+  request: Request
+  /** Parsed request context metadata */
+  context: ProxyLogOptions
+}
 
 /**
  * Format a proxy log message with timestamp and request details
@@ -15,7 +35,7 @@ import kleur from "kleur"
  *
  * // Log a proxy request with domain and path
  * proxyLog({
- *   name: "my-middleware",
+ *   name: "my-proxy",
  *   request,
  *   context: { domain: "example.com", path: "/api" }
  * })
@@ -25,16 +45,12 @@ export function proxyLog({
   name,
   request,
   context,
-}: {
-  name: string
-  request: NextRequest
-  context?: any
-}) {
+}: ProxyLog) {
   // Timestamp
   const time = new Date().toLocaleString()
 
   // Domain
-  const domain = context.domain || context.headers.get('x-middleware-request-host')
+  const domain = context.domain || context.response?.headers.get('x-middleware-request-host') || "obvia.dev"
 
   console.log(
     // Timestamp + Tag
@@ -46,8 +62,8 @@ export function proxyLog({
     // Domain
     `Domain = ${kleur.magenta(domain)} | ` +
     // Path
-    `Path = ${kleur.blue().bold(request.nextUrl?.pathname ?? "")} ` +
+    `Path = ${kleur.blue().bold(context?.path ?? "")} ` +
     // Rewrite
-    `→ (${kleur.gray(`${context.domain || ""}${context.path == "/" ? "" : context.path || "-"}`)})`
+    `→ (${kleur.gray(`${context?.domain || ""}${context?.path == "/" ? "" : context?.path || "-"}`)})`
   )
 }
